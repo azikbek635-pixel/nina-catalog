@@ -80,7 +80,7 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;display
 nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom));z-index:30;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:6px;display:flex;gap:2px;box-shadow:0 18px 40px -14px rgba(60,20,30,.35)}
 nav button{height:50px;min-width:50px;border-radius:99px;display:flex;align-items:center;justify-content:center;gap:8px;color:var(--soft);padding:0 14px;transition:background .3s var(--ease),color .3s,padding .3s var(--ease)}
 nav button span{max-width:0;overflow:hidden;white-space:nowrap;font-size:13.5px;font-weight:700;transition:max-width .35s var(--ease)}
-nav button.on{background:var(--ink);color:var(--bg);padding:0 20px}nav button.on span{max-width:110px}
+nav button.on{background:var(--ink);color:var(--bg);padding:0 20px}nav button.on span{max-width:130px}
 nav svg{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 #toast{position:fixed;left:50%;bottom:calc(98px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:11px 20px;border-radius:99px;font-weight:600;font-size:13px;opacity:0;pointer-events:none;transition:.3s var(--ease);z-index:60}#toast.on{opacity:1;transform:translate(-50%,0)}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -138,12 +138,43 @@ nav svg{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-wi
  nav{bottom:calc(12px + env(safe-area-inset-bottom));padding:5px}nav button{height:44px;min-width:44px;padding:0 12px}nav button.on{padding:0 16px}nav button span{font-size:12.5px}nav svg{width:20px;height:20px}
  .tt{padding:30px 16px 24px;font-size:18px}.grid{gap:14px 10px}
 }
+
+:root{--bk:rgba(255,255,255,.55);--top:calc(max(env(safe-area-inset-top,0px),var(--tg-safe-area-inset-top,0px)) + var(--tg-content-safe-area-inset-top,0px));--bot:calc(max(env(safe-area-inset-bottom,0px),var(--tg-safe-area-inset-bottom,0px)) + var(--tg-content-safe-area-inset-bottom,0px))}
+@media(prefers-color-scheme:dark){:root{--bk:rgba(255,255,255,.07)}}
+/* fullscreen / safe areas */
+header{padding-top:calc(var(--top) + 10px)}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:var(--top);background:var(--bg);opacity:.95;z-index:25;pointer-events:none}
+.sticky{top:var(--top)}nav{bottom:calc(var(--bot) + 14px)}.app{padding-bottom:calc(120px + var(--bot))}
+.pbar{padding-top:calc(var(--top) + 10px)}#lbx{top:calc(var(--top) + 12px)}#toast{bottom:calc(var(--bot) + 100px)}
+/* header */
+.hr{display:flex;align-items:center;gap:8px}
+.seg{display:flex;background:var(--bg2);border-radius:99px;padding:3px}
+.seg button{padding:6px 14px;border-radius:99px;font-size:12px;font-weight:700;color:var(--soft);transition:background .35s var(--ease),color .3s}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.snd{width:34px;height:34px;border-radius:50%;background:var(--bg2);display:grid;place-items:center;transition:transform .15s}.snd:active{transform:scale(.88)}
+.snd svg{width:17px;height:17px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.snd .sl{display:none}.snd.off .w{display:none}.snd.off .sl{display:block}.snd.off svg{stroke:var(--soft)}
+.ghostb{display:block;margin:10px auto 0;border:1.5px solid var(--line);border-radius:99px;padding:13px 28px;font-weight:700;transition:transform .15s,background .3s}.ghostb:active{transform:scale(.97);background:var(--bg2)}
+/* soft motion */
+.hero>*{position:relative;z-index:1}
+.hero::before,.hero::after{content:'';position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,var(--bk),transparent 70%);animation:dr 14s ease-in-out infinite}
+.hero::before{width:240px;height:240px;left:-70px;top:-70px}.hero::after{width:320px;height:320px;right:8%;bottom:-130px;animation-duration:19s;animation-delay:-6s}
+@keyframes dr{50%{transform:translate(34px,22px) scale(1.12)}}
+.ph::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.3) 50%,transparent 70%);transform:translateX(-100%);animation:sm 2.2s ease-in-out infinite;pointer-events:none}
+.ph:has(img.in)::after{display:none}@keyframes sm{to{transform:translateX(100%)}}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}.rv.in{opacity:1;transform:none}
+.pp{position:fixed;z-index:95;pointer-events:none;font-style:normal;animation:ppa .9s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes ppa{from{opacity:1;transform:translate(-50%,-50%) scale(.5)}to{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.15)}}
+.pop svg{animation:hp .55s var(--ease)}@keyframes hp{30%{transform:scale(1.5)}60%{transform:scale(.9)}100%{transform:scale(1)}}
+#sh.on .pi>*{animation:up .65s var(--ease) both}#sh.on .pi>:nth-child(2){animation-delay:.06s}#sh.on .pi>:nth-child(3){animation-delay:.1s}#sh.on .pi>:nth-child(4){animation-delay:.14s}#sh.on .pi>:nth-child(5){animation-delay:.18s}
+nav button.on svg{animation:nb .5s var(--ease)}@keyframes nb{40%{transform:scale(1.25)}100%{transform:none}}
 </style>
 </head>
 <body>
 <div id="splash">Nina</div>
 <div class="app">
-<header><div class="logo">Nina</div><button class="pill" id="lg" onclick="setLang(lang==='ru'?'uz':'ru')">RU</button></header>
+<header><div class="logo">Nina</div>
+  <div class="hr"><button class="snd" id="snd" aria-label="Sound" onclick="SFX.toggle();sndIcon()"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w" d="M16.500 9a4 4 0 010 6M19 6.500a8 8 0 010 11"/><path class="sl" d="M17 9l5 6M22 9l-5 6"/></svg></button>
+  <div class="seg" id="lg"><button data-l="ru" onclick="setLang('ru')">RU</button><button data-l="uz" onclick="setLang('uz')">UZ</button></div></div></header>
 <main>
 <section class="scr on" id="s-home">
  <button class="sbtn" onclick="goSearch()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span data-t="search"></span></button>
@@ -151,9 +182,11 @@ nav svg{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-wi
  <div class="hero" id="hero"><div><span class="badge"><b></b><span data-t="hero_b"></span></span><h1 data-t="hero_t"></h1><p data-t="hero_p"></p><button class="dark" onclick="goCat('all')" data-t="hero_cta"></button></div><div class="hstack" id="heroStack"></div></div>
  <div class="sech"><h2 data-t="cats"></h2></div><div class="rail" id="catRail"></div>
  <div id="newBox"><div class="sech"><h2 data-t="new"></h2></div><div class="rail" id="newRail"></div></div>
+ <div id="seenBox" class="hide"><div class="sech"><h2 data-t="recent"></h2></div><div class="rail" id="seenRail"></div></div>
  <div class="sech"><h2 data-t="allm"></h2><button class="lnk" onclick="goCat('all')" data-t="all_link"></button></div>
  <div class="grid" id="homeGrid"></div>
  <button class="wide" onclick="goCat('all')" data-t="all_cta"></button>
+ <button class="ghostb" onclick="randomModel()" data-t="random"></button>
  <div class="about"><b>Nina</b><p data-t="about_short"></p></div>
 </section>
 <section class="scr" id="s-cat">
@@ -191,18 +224,24 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const LS={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const L={
-ru:{hero_b:'Новая коллекция',hero_t:'Коллекции Nina',hero_p:'Женская одежда оптом и на экспорт',hero_cta:'Смотреть каталог',all_link:'Все',allm:'Все модели',share:'Поделиться',copied:'Ссылка скопирована',similar:'Похожие модели',newb:'Новинка',models:'моделей в каталоге',search:'Поиск по коду или названию',cats:'Коллекции',new:'Новинки',all_cta:'Смотреть весь каталог',
- about_short:'Производитель женской одежды. Работаем с 1996 года — оптом, для внутреннего рынка и на экспорт.',saved:'Избранное',
- t_home:'Главная',t_cat:'Каталог',t_fav:'Избранное',t_about:'О нас',all:'Все',found:'Найдено',nf:'Ничего не найдено',nfh:'Проверьте код или попробуйте другое слово',
- nofav:'Пока пусто',nofavh:'Нажмите на сердечко у понравившейся модели',err:'Не удалось загрузить каталог',retry:'Повторить',
- about_t:'О компании',about_long:'Nina — производитель женской одежды с собственным производством. Мы работаем с 1996 года и поставляем коллекции оптом как на внутренний рынок, так и на экспорт.',
- f1:'год основания',f2:'моделей в каталоге',f3v:'Опт и экспорт',f3:'Внутренний рынок и зарубежные партнёры',fav_add:'В избранное',fav_del:'В избранном',uncat:'Без категории'},
-uz:{hero_b:'Yangi kolleksiya',hero_t:'Nina kolleksiyalari',hero_p:'Ayollar kiyimi ulgurji va eksport uchun',hero_cta:'Katalogni ko‘rish',all_link:'Hammasi',allm:'Barcha modellar',share:'Ulashish',copied:'Havola nusxalandi',similar:'O‘xshash modellar',newb:'Yangi',models:'ta model katalogda',search:'Kod yoki nom bo‘yicha qidirish',cats:'Kolleksiyalar',new:'Yangi modellar',all_cta:'Butun katalogni ko‘rish',
- about_short:'Ayollar kiyimi ishlab chiqaruvchisi. 1996-yildan beri — ulgurji, ichki bozor va eksport uchun.',saved:'Sevimlilar',
- t_home:'Bosh sahifa',t_cat:'Katalog',t_fav:'Sevimlilar',t_about:'Biz haqimizda',all:'Hammasi',found:'Topildi',nf:'Hech narsa topilmadi',nfh:'Kodni tekshiring yoki boshqa so‘z kiriting',
- nofav:'Hozircha bo‘sh',nofavh:'Yoqqan modelingizdagi yurakchani bosing',err:'Katalogni yuklab bo‘lmadi',retry:'Qayta urinish',
- about_t:'Kompaniya haqida',about_long:'Nina — o‘z ishlab chiqarishiga ega ayollar kiyimi ishlab chiqaruvchisi. Biz 1996-yildan beri kolleksiyalarni ichki bozorga ham, eksportga ham ulgurji yetkazib beramiz.',
- f1:'tashkil topgan yil',f2:'ta model katalogda',f3v:'Ulgurji va eksport',f3:'Ichki bozor va xorijiy hamkorlar',fav_add:'Sevimlilarga',fav_del:'Sevimlilarda',uncat:'Kategoriyasiz'}};
+ru:{hero_b:'Новая коллекция',hero_t:'Коллекции Nina',hero_p:'Женская одежда оптом и на экспорт',hero_cta:'Смотреть каталог',
+ search:'Поиск по коду или названию',cats:'Коллекции',new:'Новинки',allm:'Все модели',all_link:'Все',all_cta:'Смотреть весь каталог',random:'Случайная модель',recent:'Вы смотрели',
+ about_short:'Производитель женской одежды. Работаем с 1996 года — оптом, для внутреннего рынка и на экспорт.',
+ saved:'Избранное',t_home:'Главная',t_cat:'Каталог',t_fav:'Избранное',t_about:'О нас',all:'Все',found:'Найдено',
+ nf:'Ничего не найдено',nfh:'Проверьте код или попробуйте другое слово',nofav:'Пока пусто',nofavh:'Нажмите на сердечко у понравившейся модели',
+ err:'Не удалось загрузить каталог',retry:'Повторить',about_t:'О компании',
+ about_long:'Nina — производитель женской одежды с собственным производством. Мы работаем с 1996 года и поставляем коллекции оптом как на внутренний рынок, так и на экспорт.',
+ f1:'год основания',f2:'моделей в каталоге',f3v:'Опт и экспорт',f3:'Внутренний рынок и зарубежные партнёры',
+ share:'Поделиться',copied:'Ссылка скопирована',similar:'Похожие модели',newb:'Новинка',uncat:'Без категории',fav_on:'Добавлено в избранное',fav_off:'Удалено из избранного',sound:'Звук'},
+uz:{hero_b:'Yangi kolleksiya',hero_t:'Nina kolleksiyalari',hero_p:'Ayollar kiyimi ulgurji va eksport uchun',hero_cta:'Katalogni ko‘rish',
+ search:'Kod yoki nom bo‘yicha qidirish',cats:'Kolleksiyalar',new:'Yangi modellar',allm:'Barcha modellar',all_link:'Hammasi',all_cta:'Butun katalogni ko‘rish',random:'Tasodifiy model',recent:'Siz ko‘rgansiz',
+ about_short:'Ayollar kiyimi ishlab chiqaruvchisi. 1996-yildan beri ulgurji, ichki bozor va eksport uchun ishlaymiz.',
+ saved:'Sevimlilar',t_home:'Bosh sahifa',t_cat:'Katalog',t_fav:'Sevimlilar',t_about:'Biz haqimizda',all:'Hammasi',found:'Topildi',
+ nf:'Hech narsa topilmadi',nfh:'Kodni tekshiring yoki boshqa so‘z kiriting',nofav:'Hozircha bo‘sh',nofavh:'Yoqqan modelingizdagi yurakchani bosing',
+ err:'Katalogni yuklab bo‘lmadi',retry:'Qayta urinish',about_t:'Kompaniya haqida',
+ about_long:'Nina — o‘z ishlab chiqarishiga ega ayollar kiyimi ishlab chiqaruvchisi. Biz 1996-yildan beri kolleksiyalarni ichki bozorga ham, eksportga ham ulgurji yetkazib beramiz.',
+ f1:'tashkil topgan yil',f2:'ta model katalogda',f3v:'Ulgurji va eksport',f3:'Ichki bozor va xorijiy hamkorlar',
+ share:'Ulashish',copied:'Havola nusxalandi',similar:'O‘xshash modellar',newb:'Yangi',uncat:'Kategoriyasiz',fav_on:'Sevimlilarga qo‘shildi',fav_off:'Sevimlilardan olib tashlandi',sound:'Tovush'}};
 let lang=LS.get('nina_lang',null)||((tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user&&tg.initDataUnsafe.user.language_code==='uz')?'uz':'ru');
 const T=k=>L[lang][k];
 let cats=[],prods=[],byCode=new Map(),catMap=new Map(),counts={},favs=new Set(LS.get('nina_fav',[])),cat='all',curCode=null,curTab='home';
@@ -238,7 +277,7 @@ function chips(el,sel){
 }
 function countUp(el,to){const t0=performance.now(),d=900;(function f(t){const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=Math.round(to*e).toLocaleString('ru-RU').replace(/\u00a0/g,' ');if(k<1)requestAnimationFrame(f)})(t0)}
 
-function renderHome(){renderBanners();
+function renderHome(){renderBanners();renderSeen();
   $('catRail').innerHTML=cats.filter(c=>counts[c.id]).map(c=>`<button class="tile" data-g="${esc(c.id)}" style="background:linear-gradient(145deg,${esc(c.color_from)},${esc(c.color_to)})"><b>${esc(cn(c))}</b><small>${counts[c.id]}</small></button>`).join('');
   const nw=prods.filter(p=>p.is_new).slice(0,12);
   $('newBox').style.display=nw.length?'block':'none';
@@ -287,19 +326,19 @@ function renderFav(){
   g.innerHTML=l.map((p,i)=>card(p,i)).join('');
 }
 function applyLang(){
-  document.documentElement.lang=lang;$('lg').textContent=lang.toUpperCase();
+  document.documentElement.lang=lang;document.querySelectorAll('#lg button').forEach(b=>b.classList.toggle('on',b.dataset.l===lang));
   document.querySelectorAll('[data-t]').forEach(e=>e.textContent=T(e.dataset.t));
   document.querySelectorAll('[data-tp]').forEach(e=>e.placeholder=T(e.dataset.tp));
   if(prods.length){renderHome();renderCat();renderFav()}
 }
-function setLang(l){lang=l;LS.set('nina_lang',l);applyLang();hap();if(curCode&&$('sh').classList.contains('on'))fillSheet(curCode)}
+function setLang(l){if(l===lang)return;lang=l;LS.set('nina_lang',l);try{tg.CloudStorage.setItem('lang',l)}catch(e){}SFX.tap();applyLang();hap();if(curCode&&$('sh').classList.contains('on'))fillSheet(curCode)}
 
 /* ---------- navigation ---------- */
 function tab(n){
   curTab=n;document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id==='s-'+n));
   document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===n));
   if(n==='fav')renderFav();if(n==='about')$('cnt2').textContent=prods.length.toLocaleString('ru-RU');
-  window.scrollTo(0,0);hap();backBtn();
+  window.scrollTo(0,0);hap();SFX.tab();if(n==='home')renderSeen();backBtn();
 }
 function goCat(id){cat=id;tab('cat');renderCat()}
 function goSearch(){tab('cat');setTimeout(()=>$('q').focus(),150)}
@@ -313,9 +352,9 @@ function addRecent(q){q=q.trim();if(!q)return;let r=LS.get('nina_recent',[]).fil
 
 /* ---------- favorites ---------- */
 function togFav(code){
-  if(!code)return;favs.has(code)?favs.delete(code):favs.add(code);LS.set('nina_fav',[...favs]);hap('medium');
+  if(!code)return;favs.has(code)?favs.delete(code):favs.add(code);LS.set('nina_fav',[...favs]);hap('medium');favs.has(code)?(SFX.fav(),heartPop(code)):SFX.unfav();
   document.querySelectorAll(`[data-f="${CSS.escape(code)}"]`).forEach(e=>e.classList.toggle('on',favs.has(code)));
-  if(curTab==='fav')renderFav();syncSheetFav();toast(favs.has(code)?T('fav_del'):'✕');
+  if(curTab==='fav')renderFav();syncSheetFav();toast(favs.has(code)?T('fav_on'):T('fav_off'));
 }
 function syncSheetFav(){$('shfav').classList.toggle('on',favs.has(curCode))}
 
@@ -350,16 +389,17 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('lb').classList.c
 function openSheet(code){
   if(!byCode.has(code))return;
   if(!$('sh').classList.contains('on'))navList=(curTab==='cat'&&$('grid')._l&&$('grid')._l.length)?$('grid')._l:(curTab==='fav'?prods.filter(p=>favs.has(p.code)):prods);
-  fillSheet(code);addRecent($('q').value);
-  $('sh').classList.add('on');$('sh').scrollTop=0;document.body.style.overflow='hidden';hap();backBtn();
+  fillSheet(code);addRecent($('q').value);markSeen(code);
+  $('sh').classList.add('on');$('sh').scrollTop=0;document.body.style.overflow='hidden';hap();SFX.open();backBtn();
 }
 function stepSheet(d){const i=navList.findIndex(x=>x.code===curCode),n=navList[i+d];if(i>=0&&n){fillSheet(n.code);$('sh').scrollTop=0;hap()}}
-function closeSheet(){closeLb();$('sh').classList.remove('on');document.body.style.overflow='';backBtn()}
+function closeSheet(){if($('sh').classList.contains('on')){SFX.close();setTimeout(renderSeen,450)}closeLb();$('sh').classList.remove('on');document.body.style.overflow='';backBtn()}
 function shareCur(){const u=location.origin+location.pathname+'?code='+encodeURIComponent(curCode);if(navigator.share)navigator.share({url:u}).catch(()=>{});else if(navigator.clipboard){navigator.clipboard.writeText(u);toast(T('copied'))}}
 document.addEventListener('keydown',e=>{if(!$('sh').classList.contains('on'))return;if(e.key==='Escape')closeSheet();if(e.key==='ArrowRight')stepSheet(1);if(e.key==='ArrowLeft')stepSheet(-1)});
 
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{
+  if(e.target.closest('.chip,.tile,.dark,.wide,.ghostb,.sbtn,.nv button,.gar,.ar,.kb'))SFX.tap();
   const f=e.target.closest('[data-f]');if(f){e.stopPropagation();togFav(f.dataset.f);return}
   const sl=e.target.closest('.sl');if(sl){const el=$('bn');if(!(el._sw&&Date.now()-el._sw<400)&&sl.dataset.bc&&byCode.has(sl.dataset.bc))openSheet(sl.dataset.bc);return}
   const c=e.target.closest('.card,.hc');if(c){openSheet(c.dataset.c);return}
@@ -369,12 +409,41 @@ document.addEventListener('click',e=>{
 });
 new IntersectionObserver(en=>{if(en[0].isIntersecting)more($('grid'))},{rootMargin:'800px'}).observe($('sent'));
 
+/* ---------- sound (soft synth, no files) ---------- */
+const SFX=(()=>{let ctx,on=LS.get('nina_snd',true);
+  const c=()=>{if(!ctx){try{ctx=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(ctx&&ctx.state==='suspended')ctx.resume();return ctx};
+  function tone(f,t0,d,v,to){const x=c();if(!x)return;const T0=x.currentTime+t0,o=x.createOscillator(),g=x.createGain();o.type='sine';o.frequency.setValueAtTime(f,T0);if(to)o.frequency.exponentialRampToValueAtTime(to,T0+d);
+    g.gain.setValueAtTime(.0001,T0);g.gain.exponentialRampToValueAtTime(v,T0+.02);g.gain.exponentialRampToValueAtTime(.0001,T0+d);o.connect(g);g.connect(x.destination);o.start(T0);o.stop(T0+d+.05)}
+  const p=fn=>(...a)=>{if(on)fn(...a)};
+  return{get on(){return on},toggle(){on=!on;LS.set('nina_snd',on);if(on)this.fav()},
+    tap:p(()=>tone(660,0,.09,.035,440)),tab:p(()=>tone(523,0,.12,.03)),open:p(()=>{tone(392,0,.22,.035,523);tone(659,.05,.25,.02)}),close:p(()=>tone(494,0,.16,.03,330)),
+    fav:p(()=>{tone(784,0,.25,.04);tone(988,.08,.3,.035);tone(1319,.17,.45,.025)}),unfav:p(()=>tone(440,0,.16,.03,330))}})();
+function sndIcon(){$('snd').classList.toggle('off',!SFX.on)}
+/* ---------- heart sparkle ---------- */
+function heartPop(code){
+  const open=$('sh').classList.contains('on'),el=open?$('shfav'):document.querySelector(`[data-f="${CSS.escape(code)}"]`);if(!el)return;
+  el.classList.add('pop');setTimeout(()=>el.classList.remove('pop'),600);
+  if(!favs.has(code))return;const b=el.getBoundingClientRect(),cx=b.left+b.width/2,cy=b.top+b.height/2;
+  for(let i=0;i<7;i++){const n=document.createElement('i'),a=Math.PI*2*i/7+Math.random()*.6,d=26+Math.random()*26;
+    n.className='pp';n.textContent=i%2?'♥':'✦';n.style.cssText=`left:${cx}px;top:${cy}px;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d-18}px;font-size:${9+Math.random()*7}px;color:${i%3?'var(--ac)':'#D9B26A'}`;
+    document.body.appendChild(n);setTimeout(()=>n.remove(),950)}
+}
+/* ---------- recently viewed / random ---------- */
+function markSeen(c){const a=LS.get('nina_seen',[]).filter(x=>x!==c);a.unshift(c);LS.set('nina_seen',a.slice(0,12))}
+function renderSeen(){const a=LS.get('nina_seen',[]).map(c=>byCode.get(c)).filter(Boolean);$('seenBox').classList.toggle('hide',!a.length);$('seenRail').innerHTML=a.map((p,i)=>card(p,i)).join('')}
+function randomModel(){const p=prods[Math.floor(Math.random()*prods.length)];if(p)openSheet(p.code)}
+/* ---------- scroll reveal ---------- */
+if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
+  document.querySelectorAll('.sech,.about,.facts>div').forEach(el=>{el.classList.add('rv');io.observe(el)})}
+sndIcon();
+
 /* ---------- boot ---------- */
 function hideSplash(){$('splash').classList.add('off');setTimeout(()=>{const s=$('splash');s&&s.remove()},500)}
 function deepCode(){try{const sp=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.start_param;if(sp)return sp.replace(/^code[_-]?/,'')}catch(e){}try{const q=new URLSearchParams(location.search);return q.get('code')||q.get('startapp')}catch(e){return null}}
 function showError(){hideSplash();document.querySelector('main').innerHTML=`<div class="empty" style="margin-top:80px"><b>${T('err')}</b><button class="chip on" style="margin-top:14px" onclick="location.reload()">${T('retry')}</button></div>`}
 (async()=>{
-  try{tg.ready();tg.expand();tg.setHeaderColor('bg_color');try{tg.disableVerticalSwipes()}catch(e){}tg.BackButton.onClick(()=>{$('sh').classList.contains('on')?closeSheet():tab('home')})}catch(e){}
+  try{tg.ready();tg.expand();try{const h=x=>('0'+(+x).toString(16)).slice(-2),m=getComputedStyle(document.body).backgroundColor.match(/\d+/g),hx='#'+h(m[0])+h(m[1])+h(m[2]);tg.setHeaderColor(hx);tg.setBackgroundColor(hx);tg.setBottomBarColor(hx)}catch(e){}
+  try{if(!LS.get('nina_lang',null))tg.CloudStorage.getItem('lang',(er,v)=>{if(!er&&(v==='ru'||v==='uz')&&v!==lang)setLang(v)})}catch(e){}try{tg.disableVerticalSwipes()}catch(e){}tg.BackButton.onClick(()=>{$('sh').classList.contains('on')?closeSheet():tab('home')})}catch(e){}
   applyLang();
   const cache=LS.get('nina_cache_v3',null);let shown=false;
   const show=(c,p,b)=>{setData(c,p,b);applyLang();hideSplash();shown=true;const dc=deepCode();if(dc&&byCode.has(dc)){openSheet(dc)}};
