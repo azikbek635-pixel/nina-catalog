@@ -96,6 +96,114 @@ nav svg{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-wi
 .ar{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.92);color:#16110F;font-size:22px;display:none;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.2)}
 .ar.l{left:14px}.ar.r{right:14px}@media(hover:hover) and (min-width:760px){.ar{display:grid}}
 @media(max-width:759px){.bn{aspect-ratio:1080/675}}
+/* ===== Nina promo banners (изолировано, префикс nb-) ===== */
+#nbn{--nb-ink:#2A1D1F;--nb-rose:#B4677A;--nb-gold:#C9A25E;--nb-soft:#8A807B;--nb-ease:cubic-bezier(.32,.72,0,1);position:relative;margin-top:14px;border-radius:24px;overflow:hidden;aspect-ratio:1920/780;container-type:inline-size;isolation:isolate;box-shadow:0 24px 48px -30px rgba(70,20,35,.5);touch-action:pan-y}
+@media(max-width:759px){#nbn{aspect-ratio:1080/675}}
+.nb-sl{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .9s var(--nb-ease),visibility .9s}
+.nb-sl.nb-on{opacity:1;visibility:visible;z-index:2}
+.nb-sl:not(.nb-on) *{animation:none!important}
+.nb-sl>*{position:absolute}
+.nb-pad{inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 6.5cqw;z-index:3}
+.nb-eyebrow{font-size:max(13px,1.9cqw)}
+.nb-ttl{font-weight:800;letter-spacing:-.045em;line-height:1.02;font-size:clamp(28px,6cqw,96px);margin-top:.8cqw}
+.nb-sb{font-size:max(12px,1.65cqw);margin-top:1.4cqw;max-width:40cqw;line-height:1.35}
+.nb-chips{display:flex;gap:.9cqw;margin-top:1.8cqw;flex-wrap:wrap}
+.nb-chips span{font-size:max(11px,1.25cqw);font-weight:700;padding:.7cqw 1.4cqw;border-radius:99px;white-space:nowrap}
+.nb-cta{margin-top:2.2cqw;align-self:flex-start;border-radius:99px;font-weight:700;font-size:max(13px,1.5cqw);padding:max(10px,1.1cqw) max(22px,2.6cqw);position:relative;overflow:hidden}
+.nb-cta::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-130%);animation:nb_sw 4.5s ease-in-out 2.5s infinite}
+@keyframes nb_sw{0%{transform:translateX(-130%)}30%,100%{transform:translateX(130%)}}
+@keyframes nb_up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.nb-up{opacity:0}
+.nb-on .nb-up{animation:nb_up 1.1s var(--nb-ease) forwards;animation-delay:var(--d,0s)}
+@keyframes nb_spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes nb_bob{50%{translate:0 -1.2cqw}}
+@keyframes nb_pf{0%{transform:translate3d(0,-12cqw,0) rotate(0);opacity:0}10%{opacity:.9}100%{transform:translate3d(var(--dx),78cqw,0) rotate(var(--r));opacity:0}}
+@keyframes nb_bk{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(var(--bx),var(--by)) scale(1.12)}}
+@keyframes nb_gs{0%{background-position:100% 0}45%,100%{background-position:0 0}}
+.nb-pt{top:0;border-radius:100% 0 100% 0;background:linear-gradient(135deg,#FAD3D8,#E792A5);opacity:0;animation:nb_pf linear infinite;z-index:2}
+.nb-bokeh{border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,214,204,.25) 62%,transparent 70%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);animation:nb_bk ease-in-out infinite;z-index:1}
+.nb-gold{background:linear-gradient(105deg,#2A1D1F 38%,#C9A25E 47%,#FFF3D2 50%,#C9A25E 53%,#2A1D1F 62%) 100% 0/300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:nb_gs 5s ease-in-out 1.6s infinite}
+@container (max-width:560px){.nb-chips span:nth-child(n+3){display:none}.nb-sb{max-width:60cqw}}
+
+/* бейдж */
+.nb-badge{right:9cqw;top:50%;width:30cqw;height:30cqw;transform:translateY(-50%);z-index:3;display:grid;place-items:center;text-align:center;animation:nb_bob 6s ease-in-out infinite}
+.nb-badge .nb-ring{position:absolute;left:50%;top:50%;width:100%;height:100%;border-radius:50%;border:1.5px dashed var(--nb-gold);animation:nb_spin 40s linear infinite;transform:translate(-50%,-50%)}
+.nb-badge .nb-core{position:absolute;inset:9%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,rgba(255,255,255,.55) 60%,rgba(247,220,213,.7));box-shadow:0 20px 40px -20px rgba(150,70,90,.5)}
+.nb-badge b{position:relative;font-size:clamp(34px,9cqw,150px);font-weight:800;letter-spacing:-.06em;line-height:.9}
+.nb-badge small{position:relative;display:block;font-size:max(11px,1.7cqw);font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-top:.8cqw}
+@container (max-width:560px){.nb-badge{right:-3cqw;width:42cqw;height:42cqw;opacity:.9}.nb-pad{padding-right:34cqw}}
+
+/* слайд 1 */
+.nb-s1{background:linear-gradient(165deg,#FFF6EC,#F7DCD5 52%,#EAC0C3)}
+.nb-s1 .nb-rays{left:62%;top:50%;width:150cqw;aspect-ratio:1;transform:translate(-50%,-50%);background:repeating-conic-gradient(rgba(255,244,220,.6) 0 3deg,transparent 3deg 13deg);-webkit-mask:radial-gradient(circle,#000 0,transparent 58%);mask:radial-gradient(circle,#000 0,transparent 58%);animation:nb_spin 70s linear infinite;z-index:0}
+.nb-s1 .nb-leak{top:-20%;bottom:-20%;left:-60%;width:40%;transform:skewX(-18deg);background:linear-gradient(90deg,transparent,rgba(255,190,140,.45),rgba(255,150,170,.32),transparent);mix-blend-mode:screen;animation:nb_lk 7s ease-in-out 1s infinite;z-index:2}
+@keyframes nb_lk{0%{left:-60%}40%,100%{left:130%}}
+.nb-s1 .nb-eyebrow{color:#8E5F6B}
+.nb-s1 .nb-chips span{background:rgba(255,255,255,.7);color:#6d4a53;box-shadow:inset 0 0 0 1px rgba(201,162,94,.45)}
+.nb-s1 .nb-cta{background:var(--nb-ink);color:#FFF3D2}
+.nb-s1 .nb-sb{color:#6d5a5a}
+.nb-s1 .nb-badge b{color:var(--nb-ink)}.nb-s1 .nb-badge small{color:var(--nb-rose)}
+
+/* слайд 2 — зима */
+.nb-s2{background:linear-gradient(165deg,#FFFAF7,#F6E4E8 50%,#DDCBDA)}
+.nb-s2 .nb-glow{right:6cqw;top:50%;width:44cqw;height:44cqw;border-radius:50%;transform:translateY(-50%);background:radial-gradient(circle,rgba(255,255,255,.85),transparent 68%);z-index:0}
+.nb-s2 .nb-eyebrow{color:#7C6A8A}
+.nb-s2 .nb-sb{color:#645560}
+.nb-s2 .nb-chips span{background:rgba(255,255,255,.75);color:#5b4a63;box-shadow:inset 0 0 0 1px rgba(124,106,138,.35)}
+.nb-s2 .nb-cta{background:var(--nb-ink);color:#fff}
+.nb-fk{top:0;border-radius:50%;background:#fff;opacity:0;animation:nb_fk linear infinite;z-index:2;box-shadow:0 0 6px rgba(255,255,255,.9)}
+@keyframes nb_fk{0%{transform:translate3d(0,-6cqw,0);opacity:0}12%{opacity:.95}50%{transform:translate3d(var(--dx),24cqw,0)}100%{transform:translate3d(calc(var(--dx)*-.6),46cqw,0);opacity:0}}
+.nb-th{right:11cqw;top:50%;width:7cqw;height:30cqw;transform:translateY(-50%);z-index:3;animation:nb_bob 6s ease-in-out 3.5s infinite}
+.nb-th .nb-tube{position:absolute;left:1.5cqw;right:1.5cqw;top:0;bottom:3cqw;border-radius:99px;background:rgba(255,255,255,.85);box-shadow:inset 0 0 0 1.5px rgba(124,106,138,.45),0 14px 30px -16px rgba(80,50,90,.5);overflow:hidden}
+.nb-th .nb-hg{position:absolute;left:35%;right:35%;bottom:0;height:88%;background:var(--nb-rose);border-radius:99px;animation:nb_mer 3.4s cubic-bezier(.5,.1,.2,1) .6s forwards}
+@keyframes nb_mer{to{height:10%}}
+.nb-th .nb-bulb{position:absolute;left:0;right:0;bottom:0;aspect-ratio:1;border-radius:50%;background:var(--nb-rose);box-shadow:inset -.5cqw -.5cqw 1cqw rgba(0,0,0,.15)}
+.nb-th .nb-tk{position:absolute;left:-1.2cqw;top:3cqw;bottom:6cqw;width:.9cqw;background:repeating-linear-gradient(180deg,rgba(124,106,138,.5) 0 1.5px,transparent 1.5px 3cqw)}
+.nb-tr{right:23cqw;top:50%;transform:translateY(-50%);text-align:right;z-index:3}
+.nb-tr b{display:block;font-size:clamp(34px,9.5cqw,150px);font-weight:800;letter-spacing:-.06em;line-height:.9;color:var(--nb-rose)}
+.nb-tr small{font-size:max(11px,1.6cqw);font-weight:700;color:#645560}
+@container (max-width:560px){.nb-tr{display:none}.nb-th{right:6cqw;height:36cqw}}
+
+/* слайд 3 — материалы */
+.nb-s3{background:radial-gradient(120% 120% at 70% 40%,#5A2E3C,#2A1D1F 58%,#170E10)}
+.nb-s3 .nb-rays{left:68%;top:50%;width:150cqw;aspect-ratio:1;transform:translate(-50%,-50%);background:repeating-conic-gradient(rgba(201,162,94,.18) 0 2.5deg,transparent 2.5deg 12deg);-webkit-mask:radial-gradient(circle,#000 0,transparent 60%);mask:radial-gradient(circle,#000 0,transparent 60%);animation:nb_spin 80s linear infinite reverse;z-index:0}
+.nb-s3 .nb-eyebrow{color:var(--nb-gold)}
+.nb-s3 .nb-gold{background:linear-gradient(105deg,#E3C98E 38%,#C9A25E 44%,#fff 50%,#C9A25E 56%,#E3C98E 62%) 100% 0/300% 100%;-webkit-background-clip:text;background-clip:text}
+.nb-s3 .nb-ttl{color:#FFF3D2}
+.nb-s3 .nb-sb{color:#d8c9c5}
+.nb-s3 .nb-chips span{background:rgba(201,162,94,.14);color:#E3C98E;box-shadow:inset 0 0 0 1px rgba(201,162,94,.5)}
+.nb-s3 .nb-cta{background:linear-gradient(135deg,#E3C98E,#C9A25E);color:var(--nb-ink)}
+.nb-sw{width:15cqw;height:15cqw;border-radius:50%;z-index:3;display:grid;place-items:center;font-size:max(11px,1.45cqw);font-weight:800;letter-spacing:.02em;overflow:hidden;box-shadow:0 22px 40px -18px rgba(0,0,0,.7),inset 0 0 0 1.5px rgba(255,243,210,.35);animation:nb_bob 5.5s ease-in-out infinite}
+.nb-sw.nb-a{right:24cqw;top:5cqw;color:#5a3d2c;background:repeating-linear-gradient(45deg,rgba(201,162,94,.2) 0 1px,transparent 1px 4px),radial-gradient(circle at 35% 30%,#fff,#F0DFD0)}
+.nb-sw.nb-b{right:6cqw;top:12cqw;color:#FFF3D2;background:radial-gradient(circle at 35% 30%,#9A3F5E,#4A1B2B);animation-delay:-2s}
+.nb-sw.nb-b::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);transform:translateX(-120%);animation:nb_sw 4s ease-in-out 1s infinite}
+.nb-sw.nb-c{right:15cqw;bottom:4cqw;color:#fff;background:repeating-linear-gradient(135deg,rgba(255,255,255,.14) 0 1px,transparent 1px 5px),radial-gradient(circle at 35% 30%,#E8A9B8,#B4677A);animation-delay:-3.5s}
+@container (max-width:560px){.nb-sw{width:17cqw;height:17cqw}.nb-sw.nb-a{right:16cqw;top:5cqw}.nb-sw.nb-b{right:1cqw;top:20cqw}.nb-sw.nb-c{right:13cqw;bottom:4cqw}}
+
+/* навигация */
+.nb-dots{position:absolute;left:50%;bottom:1.6cqw;transform:translateX(-50%);display:flex;gap:.9cqw;z-index:6}
+.nb-dots button{all:unset;cursor:pointer;width:max(8px,.9cqw);height:max(8px,.9cqw);border-radius:99px;background:rgba(42,29,31,.25);position:relative;overflow:hidden;transition:width .5s var(--nb-ease)}
+.nb-dots button.nb-on{width:max(26px,3.2cqw);background:rgba(42,29,31,.2)}
+.nb-dots button.nb-on::after{content:'';position:absolute;inset:0;background:var(--nb-gold);transform-origin:left;animation:nb_pr 6.5s linear forwards}
+#nbn.nb-dk .nb-dots button{background:rgba(255,255,255,.35)}
+@keyframes nb_pr{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+#nbn.nb-off{display:none}
+#nbn:not(.nb-off)~#bn,#nbn:not(.nb-off)~#hero{display:none!important}
+#nbn .nb-cta{border:0;font-family:inherit;text-align:center;line-height:1.2}
+#nbn .nb-dots button{padding:0;border:0}
+@container (max-width:560px){
+#nbn .nb-pad{padding-left:5.5cqw;padding-right:36cqw}
+#nbn .nb-eyebrow{font-size:12px}
+#nbn .nb-ttl{font-size:clamp(19px,6.2cqw,26px);line-height:1.06;letter-spacing:-.035em;margin-top:5px}
+#nbn .nb-sb,#nbn .nb-chips{display:none}
+#nbn .nb-cta{margin-top:12px;padding:9px 18px;font-size:12px}
+#nbn .nb-dots{bottom:8px}
+#nbn .nb-tr{display:none}
+#nbn .nb-sw{font-size:10px;line-height:1.1;text-align:center;padding:0 7px}
+}
+@media(prefers-reduced-motion:reduce){#nbn .nb-up{opacity:1!important}#nbn .nb-pt,#nbn .nb-fk{display:none}#nbn .nb-hg{height:10%}}
+
 /* product page */
 #sh{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;transform:translateY(100%);visibility:hidden;transition:transform .45s var(--ease),visibility 0s .45s;overscroll-behavior:contain}
 #sh.on{transform:none;visibility:visible;transition:transform .45s var(--ease)}
@@ -219,6 +327,58 @@ body.introing .app *,body.introing nav *{animation-play-state:paused!important}
 <main>
 <section class="scr on" id="s-home">
  <button class="sbtn" onclick="goSearch()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span data-t="search"></span></button>
+ <div id="nbn">
+
+    <!-- 1 -->
+    <div class="nb-sl nb-s1 nb-on">
+      <div class="nb-rays"></div>
+      <div class="nb-bokeh" style="left:4cqw;top:6cqw;width:9cqw;height:9cqw;--bx:2cqw;--by:3cqw;animation-duration:9s"></div>
+      <div class="nb-bokeh" style="left:44cqw;bottom:-3cqw;width:14cqw;height:14cqw;--bx:-3cqw;--by:-2cqw;animation-duration:12s"></div>
+      <div class="nb-bokeh" style="right:3cqw;top:5cqw;width:7cqw;height:7cqw;--bx:-2cqw;--by:2cqw;animation-duration:8s"></div>
+      <div class="nb-leak"></div>
+      <div class="nb-petals" data-petals="9"></div>
+      <div class="nb-badge"><div class="nb-ring"></div><div class="nb-core"></div><div><b data-n="100">0</b><b style="font-size:.5em;margin-left:.04em">+</b><small>моделей</small></div></div>
+      <div class="nb-pad">
+        <div class="nb-eyebrow nb-serif nb-up">Женственность — в каждой детали</div>
+        <div class="nb-ttl nb-up" style="--d:.15s"><span class="nb-gold">Nina Collection</span><br>Брюки, в которых<br>вы неотразимы</div>
+        <div class="nb-sb nb-up" style="--d:.3s">Более 100 моделей женской одежды. Безупречный крой и качество по стандарту — в каждой вещи.</div>
+        <div class="nb-chips nb-up" style="--d:.45s"><span>✦ Безупречный крой</span><span>✦ Стандарт качества</span><span>✦ Опт и экспорт</span></div>
+        <button type="button" class="nb-cta nb-up" style="--d:.6s" onclick="try{SFX.tap()}catch(e){}goCat('all')">Смотреть каталог</button>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="nb-sl nb-s2">
+      <div class="nb-glow"></div>
+      <div class="nb-snow" data-snow="26" style="inset:0"></div>
+      <div class="nb-tr"><b><span data-from="5" data-n="-20" data-d="3400">5</span>°</b><small>а вам — тепло ☺</small></div>
+      <div class="nb-th"><div class="nb-tk"></div><div class="nb-tube"><div class="nb-hg"></div></div><div class="nb-bulb"></div></div>
+      <div class="nb-pad">
+        <div class="nb-eyebrow nb-serif nb-up">Зимняя коллекция Nina</div>
+        <div class="nb-ttl nb-up" style="--d:.15s">Мороз −20°?<br>Нам тепло.</div>
+        <div class="nb-sb nb-up" style="--d:.3s">Тёплые брюки на начёсе и велюре: в них хочется гулять даже в метель, а не бежать скорее домой.</div>
+        <div class="nb-chips nb-up" style="--d:.45s"><span>❄ Начёс</span><span>❄ Велюр</span><span>❄ Плотная ткань</span></div>
+        <button type="button" class="nb-cta nb-up" style="--d:.6s" onclick="try{SFX.tap()}catch(e){}goCat('all')">Зимняя коллекция</button>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="nb-sl nb-s3">
+      <div class="nb-rays"></div>
+      <div class="nb-sw nb-a">Начёс</div>
+      <div class="nb-sw nb-b">Велюр</div>
+      <div class="nb-sw nb-c">Плотная ткань</div>
+      <div class="nb-pad">
+        <div class="nb-eyebrow nb-serif nb-up">Материалы, которым доверяют</div>
+        <div class="nb-ttl nb-up" style="--d:.15s"><span class="nb-gold">Тепло,</span><br>как в объятиях</div>
+        <div class="nb-sb nb-up" style="--d:.3s">Мягкий начёс, плотный велюр и утеплённые ткани. Сугробы — не повод мёрзнуть, а повод надеть любимые брюки.</div>
+        <div class="nb-chips nb-up" style="--d:.45s"><span>✦ Начёс</span><span>✦ Велюр</span><span>✦ Утеплённые ткани</span></div>
+        <button type="button" class="nb-cta nb-up" style="--d:.6s" onclick="try{SFX.tap()}catch(e){}goCat('all')">Выбрать тёплые</button>
+      </div>
+    </div>
+
+    <div class="nb-dots" id="nbDots"><button type="button" class="nb-on" aria-label="1"></button><button type="button" aria-label="2"></button><button type="button" aria-label="3"></button></div>
+  </div>
  <div class="bn hide" id="bn"><div class="tr" id="bnTr"></div><button class="ar l" onclick="bnGo(-1)">‹</button><button class="ar r" onclick="bnGo(1)">›</button><div class="dots" id="bnDots"></div></div>
  <div class="hero" id="hero"><div><span class="badge"><b></b><span data-t="hero_b"></span></span><h1 data-t="hero_t"></h1><p data-t="hero_p"></p><button class="dark" onclick="goCat('all')" data-t="hero_cta"></button></div><div class="hstack" id="heroStack"></div></div>
  <div class="sech"><h2 data-t="cats"></h2></div><div class="rail" id="catRail"></div>
@@ -575,6 +735,41 @@ function showError(){hideSplash();document.querySelector('main').innerHTML=`<div
     else if(!shown)show(c,p,b);
   }catch(e){if(!shown)showError()}
 })();
+</script>
+<script>
+/* Nina promo banners — отдельный блок, не трогает остальной код каталога */
+(function(){try{
+  var bn=document.getElementById('nbn');if(!bn)return;
+  var sl=[].slice.call(bn.querySelectorAll('.nb-sl')),ds=[].slice.call(bn.querySelectorAll('.nb-dots button')),i=0,T=null,gone=false,tok=0,R=function(a,b){return a+Math.random()*(b-a)};
+  var ready=function(){return !document.body.classList.contains('introing')};
+  var run=function(f){if(ready()){f();return}var k=setInterval(function(){if(ready()){clearInterval(k);f()}},150)};
+  bn.querySelectorAll('[data-petals]').forEach(function(w){var n=+w.dataset.petals,h='';for(var k=0;k<n;k++){var s=R(1.2,2.6);h+='<i class="nb-pt" style="left:'+R(2,96).toFixed(0)+'%;width:'+s.toFixed(1)+'cqw;height:'+(s*1.25).toFixed(1)+'cqw;--dx:'+R(-14,14).toFixed(0)+'cqw;--r:'+R(-200,200).toFixed(0)+'deg;animation-duration:'+R(7,12).toFixed(1)+'s;animation-delay:'+R(0,9).toFixed(1)+'s"></i>'}w.outerHTML=h});
+  bn.querySelectorAll('[data-snow]').forEach(function(w){var n=+w.dataset.snow,h='';for(var k=0;k<n;k++){var s=R(.5,1.3);h+='<i class="nb-fk" style="left:'+R(0,100).toFixed(0)+'%;width:'+s.toFixed(1)+'cqw;height:'+s.toFixed(1)+'cqw;--dx:'+R(-8,8).toFixed(1)+'cqw;animation-duration:'+R(6,11).toFixed(1)+'s;animation-delay:'+R(0,8).toFixed(1)+'s"></i>'}w.outerHTML=h});
+  function count(el){var f=+(el.dataset.from||0),t=+el.dataset.n,d=+(el.dataset.d||2200),st=null;function fr(ts){if(!st)st=ts;var p=Math.min((ts-st)/d,1),e=1-Math.pow(1-p,3),v=Math.round(f+(t-f)*e);el.textContent=(v<0?'\u2212':'')+Math.abs(v);if(p<1)requestAnimationFrame(fr)}requestAnimationFrame(fr)}
+  function tick(){
+    var home=(typeof curTab==='undefined'||curTab==='home'),sh=document.getElementById('sh'),open=sh&&sh.classList.contains('on');
+    if(document.hidden||open){T=setTimeout(tick,800);return}
+    if(!ready()){gone=true;T=setTimeout(tick,800);return}
+    if(!home){gone=true;T=setTimeout(tick,800);return}
+    if(gone){gone=false;go(i);return}
+    go(i+1);
+  }
+  function go(n){
+    i=(n+sl.length)%sl.length;clearTimeout(T);var me=++tok;
+    sl.forEach(function(s,k){s.classList.toggle('nb-on',k===i)});
+    ds.forEach(function(d,k){d.classList.remove('nb-on');if(k===i){void d.offsetWidth;d.classList.add('nb-on')}});
+    bn.classList.toggle('nb-dk',i===2);
+    sl[i].querySelectorAll('[data-n]').forEach(function(el){el.textContent=el.dataset.from||0;run(function(){setTimeout(function(){if(me===tok)count(el)},500)})});
+    T=setTimeout(tick,6500);
+  }
+  ds.forEach(function(d,k){d.addEventListener('click',function(){go(k)})});
+  var x0=null;
+  bn.addEventListener('pointerdown',function(e){x0=e.clientX});
+  bn.addEventListener('pointercancel',function(){x0=null});
+  bn.addEventListener('pointerup',function(e){if(x0===null)return;var dx=e.clientX-x0;x0=null;if(Math.abs(dx)>40)go(i+(dx<0?1:-1))});
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)gone=true});
+  go(0);
+}catch(e){}})();
 </script>
 </body>
 </html>
